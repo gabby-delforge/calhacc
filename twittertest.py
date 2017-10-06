@@ -1,5 +1,5 @@
 import tweepy
-import _json
+import json
 from tweepy.auth import OAuthHandler
 from tweepy import Stream
 from tweepy.streaming import StreamListener
@@ -17,8 +17,14 @@ auth.set_access_token(access_token, access_secret)
 api = tweepy.API(auth)
 
 #Prints 10 homepage tweets
-for status in tweepy.Cursor(api.home_timeline).items(10):
-    print(status.text)
+def process_tweet(tweet):
+	json.dumps(tweet)
+
+processed_tweets = []
+for tweet in tweepy.Cursor(api.home_timeline).items(10):
+    processed_tweets.append(process_tweet(tweet._json))
+
+print(processed_tweets)
 
 class MyListener(StreamListener):
 
