@@ -16,13 +16,9 @@ auth.set_access_token(access_token, access_secret)
 
 api = tweepy.API(auth)
 
-def process_tweet(tweet):
-    print(tweet)
-
 #Prints 10 homepage tweets
 for status in tweepy.Cursor(api.home_timeline).items(10):
-    process_tweet(status.text)
-
+    print(status.text)
 
 class MyListener(StreamListener):
 
