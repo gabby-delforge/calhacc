@@ -1,8 +1,9 @@
 import struct 
-from matplotlib import plot
+import matplotlib
 
 def convert(imgs, labels):
 	#Remove header
+	print("hi")
 	openfile = open(imgs, 'rb')
 	a = array.array("L")
 	header = a.fromfile(openfile, 4)
