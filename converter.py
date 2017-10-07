@@ -13,28 +13,15 @@ def convert(imgs, labels):
 
 	with open(labels, 'rb') as open_label:
 		magic, num_img = struct.unpack(">II", openfile.read(8))
-		
-
-	get_img = lambda i: (imgs_list[i], labels_list[i])
-	
-	#num_imgs = 
-	#num_rows = 
-	#num_cols = 
-
-	#Splice imgs
-	#Returns a list of lists, num_imgs long
+			
 	imgs_list = splice_imgs(imgs)
-
-	#Splice labels
-	#Returns a list of labels, num_imgs long
 	labels_list = splice_labels(labels)
 
-	#Merge into correct format
-	#merged = 
-	
-	#return merged 
+	get_tuple = lambda i: (imgs_list[i], labels_list[i])
 
-	get_tuple = lambda i: (imgs[i], labels[i])
+	merged = []
+	for i in range(num_imgs):
+		merged += get_tuple(i)
 
 """returns a list of lists where each nested list contains all the pixel values
 for a particular image"""
