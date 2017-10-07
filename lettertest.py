@@ -54,7 +54,20 @@ class Network(object):
 		result = [(argmax(get_output(x)), y) for (x, y) in test_data]
 		return sum([(x==y) for (x, y) in result])
 
-	def loss(self, ):
+	def loss(self, x, y):
+		b = np.zeros(x.shape) for x in self.bias
+		w = np.zeros(y.shape) for y in self.weights
+		activation = x
+		activationlist = [x]
+		zlist = []
+		for bias, weight in zip(self.biases, self.weights):
+			z = np.dot(weight, activation) + bias
+			zlist.append(z)
+			activation = sigmoid(z)
+			activationlist.append(activation)
+
+		for l in self.layers[1:]:
+			z = np.dot()
 
 
 def sigmoid(z):
