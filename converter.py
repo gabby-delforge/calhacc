@@ -42,12 +42,16 @@ def splice_imgs(img_file):
 			pixels_count = 0
 			img_pixels = []
 			while pixels_count < num_pixels:
-				_next = pixels_stream.read(1)
-				pixel = struct.unpack("B", _next)
-				#print(pixel[0])
-				img_pixels.append(pixel[0])
+				try:
+					_next = pixels_stream.read(1)
+					pixel = struct.unpack("B", _next)
+					#print(pixel[0])
+					img_pixels.append(pixel[0])
 
-				pixels_count += 1
+					pixels_count += 1
+				except structerror: 
+					print("reached the end of the stream ( at image number " + str(pixels_count) + ")")
+					return result
 			#print("i've reached the end of image " + str(num_imgs_read) + "!")
 			num_imgs_read += 1
 			result.append(img_pixels)
