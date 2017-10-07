@@ -37,7 +37,20 @@ class Network(object):
 		epochs - number of times to run through training
 		mini_batch_size - size of mini_batch to use to update weights - can be resource-heavy
 		test_data - used for tracking progress, resource-heavy. """
-	def learn(self, rate, epochs, mini_batch_size, test_data = None):
+	def learn(self, rate, mini_batch_size, test_data = None):
+		if test_data:
+			num_tests = len(training_data)
+		n = len(training_data)
+		for j in xrange(epochs):
+			random.shuffle(training_data)
+			mini_batches = [training_data[k + mini_batch_size] for k in xrange(0, n, mini_batch_size)]
+			for batch in mini_batches:
+				self.update_mini_batch(mini_batch) #Updates weights and biases
+			if test_data:
+				print("Epoch " + j + ": " + self.evaluate(test_data) + "/" + num_tests)
+			else:
+				print("Epoch " + j + " complete")
+
 
 	"""Uses the training data in MINI_BATCH to update the network's weights and biases. """
 	def update_mini_batch(self, mini_batch):
@@ -75,6 +88,7 @@ def sigmoid(z):
 
 """Derivative of the sigmoid function. """
 def sigmoid_prime(z):
+	return np.exp(z)/(1.0 + np.exp(z))**2
 	
 
 
