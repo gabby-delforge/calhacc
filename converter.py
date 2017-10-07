@@ -3,36 +3,26 @@ import matplotlib as mpl
 import numpy as np
 import io
 
+num_pixels = 784
+num_imgs = 10000
 
 def convert(imgs, labels):
 	#Remove header
 	
 	with open(imgs, 'rb') as open_image:
-		magic, num_img, rows, cols = struct.unpack(">IIII", openfile.read(16))
+		magic, num_img, rows, cols = struct.unpack(">IIII", open_image.read(16))
 
 	with open(labels, 'rb') as open_label:
-		magic, num_img = struct.unpack(">II", openfile.read(8))
-		
-
-	get_img = lambda i: (imgs[i], labels[i])
-	
-	#num_imgs = 
-	#num_rows = 
-	#num_cols = 
-
-	#Splice imgs
-	#Returns a list of lists, num_imgs long
+		magic, num_img = struct.unpack(">II", open_label.read(8))
+			
 	imgs_list = splice_imgs(imgs)
-
-	#Splice labels
-	#Returns a list of labels, num_imgs long
 	labels_list = splice_labels(labels)
 
-	#Merge into correct format
-	#merged = 
-	
-	#return merged 
+	get_tuple = lambda i: (imgs_list[i], labels_list[i])
 
+	merged = []
+	for i in range(num_imgs):
+		merged += get_tuple(i)
 
 """returns a list of lists where each nested list contains all the pixel values
 for a particular image"""
@@ -42,7 +32,7 @@ def splice_imgs(img_file):
 	pixels_stream = open(img_file, 'rb')
 	pixels_stream.read(16)
 	count = 1
-	while len(result) < 10000:
+	while len(result) < num_imgs:
 		num_pixels = 0
 		img_pixels = []
 		while num_pixels < 784:
