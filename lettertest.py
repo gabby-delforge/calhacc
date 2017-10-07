@@ -87,6 +87,7 @@ def sigmoid(z):
 
 """Derivative of the sigmoid function. """
 def sigmoid_prime(z):
+	sigmoid(z) * (1 - sigmoid(z))
 
 
 net = Network([784, 49 ,10])
