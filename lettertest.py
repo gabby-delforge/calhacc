@@ -37,7 +37,7 @@ class Network(object):
 		epochs - number of times to run through training
 		mini_batch_size - size of mini_batch to use to update weights - can be resource-heavy
 		test_data - used for tracking progress, resource-heavy. """
-	def learn(self, rate, mini_batch_size, test_data = None):
+	def learn(self, test_data = None):
 		if test_data:
 			num_tests = len(training_data)
 		n = len(training_data)
