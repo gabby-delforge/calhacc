@@ -21,11 +21,11 @@ def convert(imgs, labels):
 	print("After label splicing")		
 
 
-	get_tuple = lambda i: (imgs_list[i], labels_list[i])
+	get_tuple = lambda i: [imgs_list[i], labels_list[i]]
 
 	merged = []
-	for i in range(num_imgs):
-		merged += get_tuple(i)
+	for i in range(10):
+		merged.append(get_tuple(i))
 		
 	print(merged)
 	return merged
@@ -49,8 +49,8 @@ def splice_imgs(img_file):
 					img_pixels.append(pixel[0])
 
 					pixels_count += 1
-				except structerror: 
-					print("reached the end of the stream ( at image number " + str(pixels_count) + ")")
+				except struct.error: 
+					print("reached the end of the stream (at image number " + str(num_imgs_read) + ")")
 					return result
 			#print("i've reached the end of image " + str(num_imgs_read) + "!")
 			num_imgs_read += 1
@@ -67,12 +67,16 @@ def splice_labels(labels_file):
 		labels_stream.read(8)
 		num_labels_read = 1
 		while len(result) < num_imgs:
-			_next = labels_stream.read(1)
-			label = struct.unpack("B", _next)
-			print(label[0])
-			print("i've reached the end of label " + str(num_labels_read) + "!")
-			num_labels_read += 1
-			result.append(label[0])
+			try:
+				_next = labels_stream.read(1)
+				label = struct.unpack("B", _next)
+				print(label[0])
+				print("i've reached the end of label " + str(num_labels_read) + "!")
+				num_labels_read += 1
+				result.append(label[0])
+			except struct.error:
+				print("reached the end of the stream (at label number " + str(num_labels_read) + ")")
+				return result
 	return result
 
 convert("MNISTfiles/test_images", "MNISTfiles/test_labels")
