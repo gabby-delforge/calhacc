@@ -1,17 +1,21 @@
 import struct 
-import matplotlib
+import matplotlib as mpl
+import numpy as np
 import io
 
 
 def convert(imgs, labels):
 	#Remove header
 	
-	with open(imgs, 'rb') as openfile:
-		header = openfile.read(4)
-		header = struct.unpack("i", header)
-		num_images = openfile.read(4)
-		num_images = struct.unpack("i", num_images)
-	print(num_images)
+	with open(imgs, 'rb') as open_image:
+		magic, num_img, rows, cols = struct.unpack(">IIII", openfile.read(16))
+
+	with open(labels, 'rb') as open_label:
+		magic, num_img = struct.unpack(">II", openfile.read(8))
+		
+
+	get_img = lambda i: (imgs[i], labels[i])
+	
 	#num_imgs = 
 	#num_rows = 
 	#num_cols = 
