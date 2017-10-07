@@ -56,8 +56,8 @@ class Network(object):
 		return sum([(x==y) for (x, y) in result])
 
 	def loss(self, x, y):
-		b = np.zeros(x.shape) for x in self.bias
-		w = np.zeros(y.shape) for y in self.weights
+		b = [np.zeros(x.shape) for x in self.bias]
+		w = [np.zeros(y.shape) for y in self.weights]
 		activation = x
 		activationlist = [x]
 		zlist = []
@@ -67,8 +67,14 @@ class Network(object):
 			activation = sigmoid(z)
 			activationlist.append(activation)
 
+		error = (activationlist[len(activationlist) - 1] - y) * sigomid_prime(zlist[len(zlist) - 1])
+		b[len(b) - 1] = error
+		w[len(w) - 1] = np.dot(error, activationlist[len(activationlist) - 2].transpose())
+
+
 		for l in self.layers[1:]:
-			z = np.dot()
+
+			
 
 
 def sigmoid(z):
