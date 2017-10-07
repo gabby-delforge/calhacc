@@ -23,6 +23,8 @@ def convert(imgs, labels):
 	merged = []
 	for i in range(num_imgs):
 		merged += get_tuple(i)
+		
+	return merged
 
 """returns a list of lists where each nested list contains all the pixel values
 for a particular image"""
