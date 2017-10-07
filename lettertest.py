@@ -42,6 +42,13 @@ class Network(object):
 	"""Uses the training data in MINI_BATCH to update the network's weights and biases. """
 	def update_mini_batch(self, mini_batch, rate):
 
+	def evaluate(self, test_data):
+		result = [(argmax(get_output(x)), y) for (x, y) in test_data]
+		return sum([(x==y) for (x, y) in result]
+
+
+
+
 	def loss(self, )
 
 
