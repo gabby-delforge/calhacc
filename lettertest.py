@@ -41,15 +41,18 @@ class Network(object):
 
 	"""Uses the training data in MINI_BATCH to update the network's weights and biases. """
 	def update_mini_batch(self, mini_batch, rate):
+		gradient_w = np.zeros(x.shape) for x in self.weights
+		gradient_b = np.zeros(y.shape) for y in self.bias
+		for x, y in mini_batch:
+			d_grad_w, d_grad_b = self.loss()
+		self.weights = 
+		self.bias =
 
 	def evaluate(self, test_data):
 		result = [(argmax(get_output(x)), y) for (x, y) in test_data]
-		return sum([(x==y) for (x, y) in result]
+		return sum([(x==y) for (x, y) in result])
 
-
-
-
-	def loss(self, )
+	def loss(self, ):
 
 
 def sigmoid(z):
