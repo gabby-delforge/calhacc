@@ -33,7 +33,7 @@ for a particular image"""
 def splice_imgs(img_file):
 	result = []
 	#make the file into a stream of bytes
-	pixels_stream = io.open(img_file)
+	pixels_stream = open(img_file, 'rb')
 	while result.length < 60000:
 		num_pixels = 0
 		img_pixels = []
@@ -43,7 +43,7 @@ def splice_imgs(img_file):
 			img_pixels.append(pixel)
 
 			num_pixels += 1
-		result.append(img_pixels)
+		result.append(img_pixels, 'rb')
 	return result
 
 
@@ -52,7 +52,7 @@ def splice_imgs(img_file):
 read from the corresponding image"""
 def splice_labels(labels_file):
 	result = []
-	labels_stream = io.open(labels_file)
+	labels_stream = open(labels_file)
 	while result.length < 60000:
 		_next = labels_stream.read(4)
 		label = struct.unpack("I", _next)
