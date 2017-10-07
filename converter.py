@@ -9,11 +9,9 @@ def convert(imgs, labels):
 	
 	with open(imgs, 'rb') as open_image:
 		magic, num_img, rows, cols = struct.unpack(">IIII", openfile.read(16))
-		image = np.fromfile(open_image)
 
 	with open(labels, 'rb') as open_label:
-		magic, num_img, rows, cols = struct.unpack(">IIII", openfile.read(8))
-		label = np.fromfile(open_label, np.uint8)
+		magic, num_img = struct.unpack(">II", openfile.read(8))
 		
 
 	get_img = lambda i: (imgs[i], labels[i])
