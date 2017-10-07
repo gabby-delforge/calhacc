@@ -4,15 +4,16 @@ import numpy as np
 import io
 
 num_pixels = 784
+num_imgs = 10000
 
 def convert(imgs, labels):
 	#Remove header
 	
 	with open(imgs, 'rb') as open_image:
-		magic, num_img, rows, cols = struct.unpack(">IIII", openfile.read(16))
+		magic, num_img, rows, cols = struct.unpack(">IIII", open_image.read(16))
 
 	with open(labels, 'rb') as open_label:
-		magic, num_img = struct.unpack(">II", openfile.read(8))
+		magic, num_img = struct.unpack(">II", open_label.read(8))
 			
 	imgs_list = splice_imgs(imgs)
 	labels_list = splice_labels(labels)
@@ -34,7 +35,7 @@ def splice_imgs(img_file):
 	pixels_stream.read(4)
 	pixels_stream.read(4)
 	count = 1
-	while len(result) < 10000:
+	while len(result) < num_imgs:
 		num_pixels = 0
 		img_pixels = []
 		while num_pixels < 784:
