@@ -3,9 +3,8 @@ import matplotlib as mpl
 import numpy as np
 import io
 
+num_pixels = 784
 
-
-num_images = #however many images are in the file
 def convert(imgs, labels):
 	#Remove header
 	
@@ -16,7 +15,7 @@ def convert(imgs, labels):
 		magic, num_img = struct.unpack(">II", openfile.read(8))
 		
 
-	get_img = lambda i: (imgs[i], labels[i])
+	get_img = lambda i: (imgs_list[i], labels_list[i])
 	
 	#num_imgs = 
 	#num_rows = 
@@ -35,6 +34,7 @@ def convert(imgs, labels):
 	
 	#return merged 
 
+	get_tuple = lambda i: (imgs[i], labels[i])
 
 """returns a list of lists where each nested list contains all the pixel values
 for a particular image"""
