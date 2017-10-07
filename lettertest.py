@@ -7,7 +7,7 @@ training_data = converter.convert("MNISTfiles/train_images", "MNISTfiles/train_l
 test_data = converter.convert("MNISTfiles/test_images", "MNISTfiles/test_labels")
 
 num_epochs = 1000
-mini_batch = 264
+mini_batch_size = 264
 learn_rate = 10
 
 class Network(object):
@@ -40,13 +40,16 @@ class Network(object):
 	def learn(self, rate, epochs, mini_batch_size, test_data = None):
 
 	"""Uses the training data in MINI_BATCH to update the network's weights and biases. """
-	def update_mini_batch(self, mini_batch, rate):
+	def update_mini_batch(self, mini_batch):
 		gradient_w = np.zeros(x.shape) for x in self.weights
 		gradient_b = np.zeros(y.shape) for y in self.bias
 		for x, y in mini_batch:
-			d_grad_w, d_grad_b = self.loss()
-		self.weights = 
-		self.bias =
+			d_grad_w, d_grad_b = self.loss(x, y)
+			gradient_w = [gw + dgw for gw, dgw in zip(gradient_w, d_grad_w)]
+			gradient_b = [gb + dgb for gb, dgb in zip(gradient_b, d_grad_b)]
+		self.weights = [w - (learning_rate/len(mini_batch))* gradient_w for w, gradient_w in zip(self.weights, gradient_w)]
+		self.bias = [b - (learning_rate/len(mini_batch))* gradient_b for b, gradient_b in zip(self.bias, gradient_b)]
+
 
 	def evaluate(self, test_data):
 		result = [(argmax(get_output(x)), y) for (x, y) in test_data]
