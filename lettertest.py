@@ -1,22 +1,32 @@
 import converter
 import numpy as np
 
-training_data = converter.convert("MNISTfiles/test_images", "MNISTfiles/test_labels")
+training_data = converter.convert("MNISTfiles/train_images", "MNISTfiles/train_labels")
+test_data = converter.convert("MNISTfiles/test_images", "MNISTfiles/test_labels")
+
+num_epochs = 1000
+mini_batch = 264
+learn_rate = 10
 
 class Network(object):
 	""" Sizes is an array whose length equals the number of layers in the NN, 
 	and whose values represent the number of nodes in each layer. 
 	Biases and weights are initialized randomly to start with. 
-	biases format - []
-	weights format - 
+	biases format - list of length layers- 1 with inner lists of length size[i], the size of the layer indexed with i
+	weights format - list of length layers with inner lists of length size[i], the size of the layer indexed with i
+
 	"""
 	def __init__(self, sizes):
 		self.layers = len(sizes)
 		self.sizes = sizes
 		self.bias = [np.random.randn(size[i], layers - 1) for i in layers - 1]
 		self.weights = [np.random.randn(size[i], layers) for i in layers]
-	""" Given an input a, feeds the input through each layer to get an output. """
+
+	""" Given an input a, feeds the input through each layer to get an output.
+	a - list of 784 opacity values (0-255)
+	"""
 	def get_output(self, a):
+		for i in range(layers - 1):
 
 	"""Uses stochastic gradient descent to minimize loss. 
 		rate - learning rate
