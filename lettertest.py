@@ -73,6 +73,11 @@ class Network(object):
 
 
 		for l in self.layers[1:]:
+			z = zlist[len(zlist) - 1]
+			error = np.dot(self.weights[len(self.weights) - l], error) * sigmoid_prime(z)
+			b[len(b) - 1] = error
+			w[len(w) - 1] = np.dot(error, activationlist[len(activationlist) - l].transpose())
+		return (b, w)
 
 			
 
