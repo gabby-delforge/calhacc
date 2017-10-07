@@ -13,8 +13,8 @@ class Network(object):
 	def __init__(self, sizes):
 		self.layers = len(sizes)
 		self.sizes = sizes
-		self.bias = [np.random.randn(layers-1, side[i]) for i in layers - 1]
-		self.weights = [np.random.randn(layers, size[i]) for i in layers]
+		self.bias = [np.random.randn(size[i], layers - 1) for i in layers - 1]
+		self.weights = [np.random.randn(size[i], layers) for i in layers]
 	""" Given an input a, feeds the input through each layer to get an output. """
 	def get_output(self, a):
 
