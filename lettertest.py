@@ -50,7 +50,6 @@ class Network(object):
 		self.weights = [w - (learning_rate/len(mini_batch))* gradient_w for w, gradient_w in zip(self.weights, gradient_w)]
 		self.bias = [b - (learning_rate/len(mini_batch))* gradient_b for b, gradient_b in zip(self.bias, gradient_b)]
 
-
 	def evaluate(self, test_data):
 		result = [(argmax(get_output(x)), y) for (x, y) in test_data]
 		return sum([(x==y) for (x, y) in result])
@@ -63,6 +62,7 @@ def sigmoid(z):
 
 """Derivative of the sigmoid function. """
 def sigmoid_prime(z):
+	
 
 
 net = Network([784, 49 ,10])
