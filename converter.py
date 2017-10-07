@@ -3,8 +3,6 @@ import matplotlib
 import io
 
 
-
-num_images = #however many images are in the file
 def convert(imgs, labels):
 	#Remove header
 	
@@ -20,11 +18,11 @@ def convert(imgs, labels):
 
 	#Splice imgs
 	#Returns a list of lists, num_imgs long
-	imgs = splice_imgs(imgs_file)
+	imgs_list = splice_imgs(imgs)
 
 	#Splice labels
 	#Returns a list of labels, num_imgs long
-	labels = splice_labels(labels_file)
+	labels_list = splice_labels(labels)
 
 	#Merge into correct format
 	#merged = 
@@ -42,16 +40,19 @@ def splice_imgs(img_file):
 	pixels_stream.read(4)
 	pixels_stream.read(4)
 	pixels_stream.read(4)
-	while len(result) < num_images:
+	count = 1
+	while len(result) < 10000:
 		num_pixels = 0
 		img_pixels = []
-		while num_pixels < 400:
+		while num_pixels < 784:
 			_next = pixels_stream.read(1)
 			pixel = struct.unpack("B", _next)
-			print(pixel)
-			img_pixels.append(pixel)
+			print(pixel[0])
+			img_pixels.append(pixel[0])
 
 			num_pixels += 1
+		print("i've reached the end of image " + str(count) + "!")
+		count += 1
 		result.append(img_pixels)
 	return result
 
@@ -67,8 +68,8 @@ def splice_labels(labels_file):
 	while len(result) < 60000:
 		_next = labels_stream.read(1)
 		label = struct.unpack("B", _next)
-		print(label)
-		result.append(label)
+		print(label[0])
+		result.append(label[0])
 	return result
 
 
