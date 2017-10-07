@@ -6,7 +6,6 @@ from tweepy.streaming import StreamListener
 
 consumer_key = "FTdfjeihzxaUVKxGZvILikLs0"
 consumer_secret = "c7D1pHZd77q2bV0L61M729WyM58d34xi3wF1cKOvUemnhNQ2pl"
-
 access_token =	"347981696-6scrrVQWcTDaVZLlq6uTpBaRa4RiVSe6UNl4IJeD"
 access_secret = "eW89ZrfLCKweiLuXmTNbljjaCRMcUxkYUEcWn756Ztpuj"
 
@@ -17,8 +16,11 @@ auth.set_access_token(access_token, access_secret)
 api = tweepy.API(auth)
 
 #Prints 10 homepage tweets
+def process_tweet(tweet):
+    print(tweet)
+
 for status in tweepy.Cursor(api.home_timeline).items(10):
-    print(status.text)
+    process_tweet(status.text)
 
 class MyListener(StreamListener):
 
