@@ -2,6 +2,7 @@ import struct
 import matplotlib
 import io
 
+
 def convert(imgs, labels):
 	#Remove header
 	
@@ -34,17 +35,18 @@ for a particular image"""
 def splice_imgs(img_file):
 	result = []
 	#make the file into a stream of bytes
-	pixels_stream = io.open(img_file)
-	while result.length < 60000:
+	pixels_stream = open(img_file, 'rb')
+	while len(result) < 60000:
 		num_pixels = 0
 		img_pixels = []
 		while num_pixels < 784:
 			_next = pixels_stream.read(4)
 			pixel = struct.unpack("I", _next)
+			print(pixel)
 			img_pixels.append(pixel)
 
 			num_pixels += 1
-		result.append(img_pixels)
+		result.append(img_pixels, 'rb')
 	return result
 
 
@@ -53,10 +55,11 @@ def splice_imgs(img_file):
 read from the corresponding image"""
 def splice_labels(labels_file):
 	result = []
-	labels_stream = io.open(labels_file)
-	while result.length < 60000:
+	labels_stream = open(labels_file)
+	while len(result) < 60000:
 		_next = labels_stream.read(4)
 		label = struct.unpack("I", _next)
+		print(label)
 		result.append(label)
 	return result
 
