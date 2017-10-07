@@ -3,23 +3,28 @@ from matplotlib import plot
 
 def convert(imgs, labels):
 	#Remove header
-	header = 
-	num_imgs = 
-	num_rows = 
-	num_cols = 
+	openfile = open(imgs, 'rb')
+	a = array.array("L")
+	header = a.fromfile(openfile, 4)
+	header2 = struct.unpack(">", openfile)
+	print(header)
+	print(header2)
+	#num_imgs = 
+	#num_rows = 
+	#num_cols = 
 
 	#Splice imgs
 	#Returns a list of lists, num_imgs long
-	imgs = 
+	#imgs = 
 
 	#Splice labels
 	#Returns a list of labels, num_imgs long
-	labels = 
+	#labels = 
 
 	#Merge into correct format
-	merged = 
+	#merged = 
 	
-	return merged 
+	#return merged 
 
 #DESIRED OUTPUT:
 #List of tuples, each tuple containing a list of pixel values and a label
