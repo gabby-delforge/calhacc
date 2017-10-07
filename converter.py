@@ -36,11 +36,13 @@ def splice_imgs(img_file):
 	result = []
 	#make the file into a stream of bytes
 	pixels_stream = open(img_file, 'rb')
+	pixels_stream.read(4)
+	pixels_stream.read(4)
 	while len(result) < 60000:
 		num_pixels = 0
 		img_pixels = []
 		while num_pixels < 784:
-			_next = pixels_stream.read(4)
+			_next = pixels_stream.read(1)
 			pixel = struct.unpack("I", _next)
 			print(pixel)
 			img_pixels.append(pixel)
