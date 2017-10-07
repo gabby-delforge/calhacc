@@ -34,12 +34,13 @@ def splice_imgs(img_file):
 	result = []
 	#make the file into a stream of bytes
 	pixels_stream = open(img_file, 'rb')
-	while result.length < 60000:
+	while len(result) < 60000:
 		num_pixels = 0
 		img_pixels = []
 		while num_pixels < 784:
 			_next = pixels_stream.read(4)
 			pixel = struct.unpack("I", _next)
+			print(pixel)
 			img_pixels.append(pixel)
 
 			num_pixels += 1
@@ -53,9 +54,10 @@ read from the corresponding image"""
 def splice_labels(labels_file):
 	result = []
 	labels_stream = open(labels_file)
-	while result.length < 60000:
+	while len(result) < 60000:
 		_next = labels_stream.read(4)
 		label = struct.unpack("I", _next)
+		print(label)
 		result.append(label)
 	return result
 
