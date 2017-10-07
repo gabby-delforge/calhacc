@@ -1,6 +1,8 @@
 import converter
 import numpy as np
 
+# Inspired by and referenced from Michael Nielsen's discussion of handwriting recognition using neural networks.
+
 training_data = converter.convert("MNISTfiles/train_images", "MNISTfiles/train_labels")
 test_data = converter.convert("MNISTfiles/test_images", "MNISTfiles/test_labels")
 
@@ -26,7 +28,9 @@ class Network(object):
 	a - list of 784 opacity values (0-255)
 	"""
 	def get_output(self, a):
-		for i in range(layers - 1):
+		for w, b in zip(self.weights, self.biases):
+			a = sigmoid(np.dot(w, a) + b)
+		return a
 
 	"""Uses stochastic gradient descent to minimize loss. 
 		rate - learning rate
