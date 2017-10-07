@@ -21,6 +21,7 @@ def process_tweet(tweet):
 
 processed_tweets = []
 for tweet in tweepy.Cursor(api.home_timeline).items(10):
+	
     processed_tweets.append(process_tweet(tweet._json))
 
 print(processed_tweets)
